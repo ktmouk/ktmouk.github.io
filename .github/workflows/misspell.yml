@@ -1,0 +1,20 @@
+name: misspell
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  run-misspell:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install misspell
+        run: curl -L https://git.io/misspell | bash
+
+      - name: Run misspell
+        run: bin/misspell -error .

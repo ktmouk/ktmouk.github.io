@@ -1,0 +1,25 @@
+---
+import { Image } from "@astrojs/image/components";
+import catFootPrint from "@/images/cat-footprint.svg";
+
+const positions = [
+  "right-40 top-10 animate-[appear_0.5s_linear_forwards_1.0s]",
+  "right-32 top-32 animate-[appear_0.5s_linear_forwards_1.3s]",
+  "right-18 top-24 animate-[appear_0.5s_linear_forwards_1.6s]",
+] as const;
+---
+
+<div class="absolute right-0 w-20 opacity-10">
+  {
+    positions.map((position) => (
+      <Image
+        src={catFootPrint}
+        width={56}
+        height={56}
+        format="webp"
+        class={`absolute w-5 -rotate-45 opacity-0 ${position}`}
+        alt=""
+      />
+    ))
+  }
+</div>

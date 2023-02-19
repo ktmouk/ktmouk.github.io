@@ -1,0 +1,12 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<header>
+  <h2 class="text-2xl text-red before:inline before:content-['#_']">{text}</h2>
+  <div class="mt-3 mb-8 h-px w-20 bg-slate-200"></div>
+</header>

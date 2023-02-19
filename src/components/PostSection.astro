@@ -1,0 +1,27 @@
+---
+import SectionHeader from "@/components/SectionHeader.astro";
+import PostList from "@/components/PostList.astro";
+
+import { parseFeeds } from "@/utils/parse-feeds";
+import { mockFeeds } from "@/mocks/feeds";
+
+const prepareFeeds = async () => {
+  return import.meta.env.FETCH_POSTS === "true"
+    ? await parseFeeds([
+        { siteName: "dev.to", url: "https://dev.to/feed/ktmouk" },
+        { siteName: "zenn.dev", url: "https://zenn.dev/ktmouk/feed" },
+      ])
+    : mockFeeds;
+};
+
+const feeds = await prepareFeeds();
+---
+
+<section>
+  <SectionHeader text="Posts" />
+  <p class="my-5">
+    I sometimes write posts about how the framework works in English and
+    Japanese in order to gain new knowledge. 📝
+  </p>
+  <PostList feeds={feeds} />
+</section>

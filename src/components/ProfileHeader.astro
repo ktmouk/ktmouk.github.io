@@ -1,0 +1,28 @@
+---
+import CatFootPrints from "@/components/CatFootPrints.astro";
+import SocialLinkList from "@/components/SocialLinkList.astro";
+import { Image } from "@astrojs/image/components";
+import avator from "@/images/avator.png";
+---
+
+<header class="relative">
+  <CatFootPrints />
+  <div class="flex flex-col items-center py-20 text-slate-700">
+    <Image
+      src={avator}
+      width={130}
+      height={130}
+      class="mb-3 w-16"
+      format="webp"
+      alt=""
+    />
+    <h1 class="mb-2 text-2xl text-red">@ktmouk</h1>
+    <p class="text-center">Hi, I'm Kai Tomoyuki.</p>
+    <p class="text-center">
+      I love making web apps, libraries, and coffee! ☕.
+    </p>
+    <div class="mt-4">
+      <SocialLinkList />
+    </div>
+  </div>
+</header>

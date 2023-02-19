@@ -1,0 +1,30 @@
+---
+import type { Feed } from "@/types/feed";
+
+interface Props {
+  feeds: readonly Feed[];
+}
+
+const { feeds } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+  {
+    feeds.map((feed) => (
+      <a
+        href={feed.link}
+        class="rounded border p-3 shadow-lg shadow-slate-50 transition-all hover:border-red"
+        target="_blank"
+        rel="noopener"
+      >
+        <section class="flex h-[100%] flex-col">
+          <h3 class="line-clamp-2">{feed.title}</h3>
+          <p class="mb-5 mt-1 h-[100%] flex-1 text-sm text-slate-700">
+            <span class="line-clamp-3">{feed.description}</span>
+          </p>
+          <p class="border-t pt-1 text-xs text-slate-700">{feed.siteName}</p>
+        </section>
+      </a>
+    ))
+  }
+</div>

@@ -1,0 +1,97 @@
+---
+import DevIconList from "@/components/DevIconList.astro";
+import type { Icon } from "@/components/DevIconList.astro";
+import { ProductImage } from "@/components/ProductImage";
+import { getImage } from "@astrojs/image";
+import type { AstroComponentInstance } from "astro/dist/runtime/server";
+
+type Image = {
+  src: ImageMetadata | string;
+  alt: string;
+};
+
+interface Props {
+  title: string;
+  description: AstroComponentInstance | string;
+  repoName: string;
+  devIcons: readonly Icon[];
+  images: readonly Image[];
+}
+
+const { title, description, devIcons, repoName, images } = Astro.props;
+
+const productImages = await Promise.all(
+  images.map(async (image, index) => {
+    const isWide = index === 0;
+    return {
+      isWide,
+      original: await getImage({
+        src: image.src,
+        alt: image.alt,
+        width: 2144,
+        height: 1354,
+        format: "webp",
+      }),
+      thumbnail: await getImage({
+        src: image.src,
+        alt: image.alt,
+        width: isWide ? 674 : 330,
+        height: isWide ? 426 : 210,
+        fit: "cover",
+        format: "webp",
+      }),
+    };
+  })
+);
+---
+
+<section>
+  <h3
+    class="mb-2 text-xl before:inline before:text-slate-500 before:content-['##_']"
+  >
+    {title}
+  </h3>
+  <p class="text-slate-700">
+    {description}
+  </p>
+  <div
+    class="my-5 flex before:block before:w-1 before:flex-shrink before:rounded-full before:bg-slate-600"
+  >
+    <dl class="pl-3 text-slate-700">
+      <div class="flex">
+        <dt class="w-24">Tech Stack:</dt>
+        <dd>
+          <DevIconList icons={devIcons} />
+        </dd>
+      </div>
+      <div class="flex">
+        <dt class="w-24">GitHub:</dt>
+        <dd>
+          <a
+            href={`https://github.com/${repoName}`}
+            class="text-cyan underline"
+            target="_blank"
+            rel="noopener">{repoName}</a
+          >
+        </dd>
+      </div>
+    </dl>
+  </div>
+  <ul class="grid grid-cols-3 gap-2">
+    {
+      productImages.map(({ isWide, original, thumbnail }) => (
+        <li
+          class={`${
+            isWide ? "col-span-2 row-span-2" : "col-span-1"
+          } bg-slate-100`}
+        >
+          <ProductImage
+            original={original}
+            thumbnail={thumbnail}
+            client:visible
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>

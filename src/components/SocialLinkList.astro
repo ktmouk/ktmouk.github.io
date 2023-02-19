@@ -1,0 +1,34 @@
+---
+const SOCIAL_LINKS = [
+  {
+    name: "Twitter",
+    icon: "devicon-twitter-original",
+    size: "text-lg",
+    url: "https://twitter.com/ktmouk",
+  },
+  {
+    name: "GitHub",
+    icon: "devicon-github-original",
+    size: "text-xl",
+    url: "https://github.com/ktmouk",
+  },
+] as const;
+---
+
+<ul class="flex divide-x rounded text-sm">
+  {
+    SOCIAL_LINKS.map((link) => (
+      <li>
+        <a
+          href={link.url}
+          class="flex justify-center gap-1.5 py-1 px-3"
+          rel="noopener"
+          target="_blank"
+        >
+          <i class={`${link.icon} ${link.size}`} />
+          <span class="underline">{link.name}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

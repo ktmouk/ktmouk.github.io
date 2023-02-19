@@ -1,0 +1,75 @@
+---
+import SectionHeader from "@/components/SectionHeader.astro";
+import Product from "@/components/Product.astro";
+import hackaru1 from "@/images/hackaru-1.png";
+import hackaru2 from "@/images/hackaru-2.png";
+import hackaru3 from "@/images/hackaru-3.png";
+import hackaruDesktop1 from "@/images/hackaru-desktop-1.png";
+import hackaruDesktop2 from "@/images/hackaru-desktop-2.png";
+import markupPdfRs1 from "@/images/markup-pdf-rs-1.png";
+import markupPdfRs2 from "@/images/markup-pdf-rs-2.png";
+import markupPdfRs3 from "@/images/markup-pdf-rs-3.png";
+
+const products = [
+  {
+    title: "Hackaru",
+    description: `
+      This is a simple time-tracking app.
+      You can record the time you have worked on your tasks and review how you use your time.
+      Although it's already closed, I operated this web service on AWS and offered it for free for about 3 years.
+      You can look at all code on GitHub because as it's an open-source.`,
+    devIcons: ["docker", "terraform", "rails", "redis", "nuxt", "aws"],
+    repoName: "hackaru-app/hackaru",
+    images: [
+      { src: hackaru1, alt: "Home page" },
+      { src: hackaru2, alt: "Calendar page" },
+      { src: hackaru3, alt: "Report page" },
+    ],
+  },
+  {
+    title: "Hackaru desktop",
+    description: `
+      This is a desktop app for Hackaru.
+      You can record the time quickly from the this app without opening a browser.
+      This desktop app authenticates with the API server by using OAuth2.
+    `,
+    devIcons: ["electron", "nuxt"],
+    repoName: "hackaru-app/hackaru-desktop",
+    images: [
+      { src: hackaruDesktop1, alt: "Timer window" },
+      { src: hackaruDesktop2, alt: "Timer and Settings window" },
+    ],
+  },
+  {
+    title: "markup-pdf-rs",
+    description: `
+      The Rust library for making a PDF files by writing kind of like HTML and CSS.
+      It's inspired by Satori and React-pdf.
+    `,
+    devIcons: ["rust"],
+    repoName: "ktmouk/markup-pdf-rs",
+    images: [
+      { src: markupPdfRs1, alt: "Sample Recipe PDF" },
+      { src: markupPdfRs2, alt: "Japanses Resume Template" },
+      { src: markupPdfRs3, alt: "Lorem Ipsum sample" },
+    ],
+  },
+] as const;
+---
+
+<section>
+  <SectionHeader text="Something I've built" />
+  <div class="flex flex-col gap-14">
+    {
+      products.map((product) => (
+        <Product
+          title={product.title}
+          description={product.description}
+          devIcons={product.devIcons}
+          repoName={product.repoName}
+          images={product.images}
+        />
+      ))
+    }
+  </div>
+</section>

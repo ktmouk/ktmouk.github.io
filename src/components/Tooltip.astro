@@ -1,0 +1,16 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="group relative">
+  <div
+    class="absolute -top-full -translate-x-3 rounded-sm bg-slate-900/90 px-2 py-1 text-sm text-white opacity-0 transition group-hover:-translate-y-1 group-hover:opacity-100"
+  >
+    {text}
+  </div>
+  <slot />
+</div>

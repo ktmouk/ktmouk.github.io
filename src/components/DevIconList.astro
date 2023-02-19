@@ -1,0 +1,35 @@
+---
+import "devicon/devicon.min.css";
+import Tooltip from "@/components/Tooltip.astro";
+
+const ICONS = {
+  docker: { class: "devicon-docker-plain", name: "Docker" },
+  terraform: { class: "devicon-terraform-plain", name: "Teraform" },
+  rails: { class: "devicon-rails-plain", name: "Rails" },
+  redis: { class: "devicon-redis-plain", name: "Redis" },
+  nuxt: { class: "devicon-nuxtjs-plain", name: "NuxtJS" },
+  aws: { class: "devicon-amazonwebservices-plain", name: "AWS" },
+  electron: { class: "devicon-electron-original", name: "Electron" },
+  rust: { class: "devicon-rust-plain", name: "Rust" },
+} as const;
+
+export type Icon = keyof typeof ICONS;
+
+interface Props {
+  icons: readonly Icon[];
+}
+
+const { icons } = Astro.props;
+---
+
+<ul class="flex items-center text-xl">
+  {
+    icons.map((icon) => (
+      <li class="flex w-7 justify-center">
+        <Tooltip text={ICONS[icon].name}>
+          <i class={ICONS[icon].class} />
+        </Tooltip>
+      </li>
+    ))
+  }
+</ul>
