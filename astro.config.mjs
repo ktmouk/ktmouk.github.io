@@ -6,6 +6,7 @@ import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://ktmouk.github.io",
   integrations: [
     tailwind(),
     react(),
